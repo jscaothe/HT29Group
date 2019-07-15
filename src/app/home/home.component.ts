@@ -10,15 +10,15 @@ import { UsersAttributes } from "../shared/UsersAttributes.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public now: string;
+  public now: string = "Demo";
   public strApiGateway: string = "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
   dataResponse: any;
   public user = <Users>{};
 
   constructor(private http: Http, private auth: AuthorizationService) {
-    setInterval(() => {
-      this.now = new Date().getHours() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds()
-    }, 1);
+    //setInterval(() => {
+    //  this.now = new Date().getHours() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds()
+    //}, 1);
   }
 
   ngOnInit() {
@@ -76,9 +76,14 @@ export class HomeComponent implements OnInit {
   }
 
   getUser() {
-    console.log(this.user);
+    //console.log(this.user);
     
     return this.user;
+  }
+
+  getEmail() {
+    //console.log(this.getUser().UserAttribute.Value);
+    return this.getUser().UserAttribute.Value;
   }
 
   getCurrentDate() {

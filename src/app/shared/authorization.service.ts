@@ -7,13 +7,21 @@ const poolData = {
   ClientId: '39h3stmdpvlg9vv4u6guf0lsfm' // Your client id here  
 };
 
+
 const userPool = new CognitoUserPool(poolData);
 
 @Injectable()
 export class AuthorizationService {
+
+  public apiGateway : string =  "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
+
   cognitoUser: any;
 
   constructor() { }
+
+  getApiGateWay() {
+    return this.apiGateway;
+  }
 
   register(email, password) {
 
@@ -98,4 +106,17 @@ export class AuthorizationService {
     this.getAuthenticatedUser().signOut();
     this.cognitoUser = null;
   }
+
+	/*getResponseGetData(url: string, options: any) {
+		return new Promise(resolve => {
+			this.http.get(url, options)
+				.map(results => results.json())
+				.subscribe(data => {
+					this.dataResponse = data;
+					resolve(this.dataResponse);
+				})
+		});
+	}*/
+	
+
 }

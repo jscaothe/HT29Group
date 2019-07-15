@@ -4,7 +4,6 @@ import { Http, Headers } from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Users } from "../shared/Users.service"
 import { UsersAttributes } from "../shared/UsersAttributes.service";
-import { forEach } from '@angular/router/src/utils/collection';
 
 export class PersonWithCars {
 	constructor(public name: string, public age: number) { }
@@ -17,7 +16,6 @@ export class PersonWithCars {
 })
 export class RestApiComponent implements OnInit {
 
-	public strApiGateway : string = "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
 	dataResponse: any;
 	
 	public lstUsers: Users[] = [];
@@ -45,7 +43,8 @@ export class RestApiComponent implements OnInit {
 				let myHeaders = new Headers();
 				myHeaders.append('Authorization', token);
 				let options = { headers: myHeaders };
-				this.getResponseGetData(this.strApiGateway + "/listusers", options)
+				console.log(this.auth.getApiGateWay());
+				this.getResponseGetData(this.auth.getApiGateWay() + "/listusers", options)
 					.then(data => {
 						this.listAllUser(data["body"].toString());
 					});
@@ -78,10 +77,8 @@ export class RestApiComponent implements OnInit {
 				let sendData = {
 					"Username" : UserId
 				};
-				/*this.getResponseGetData(this.strApiGateway + "/getuser/", options).then(data => {
-					console.log(data);
-				});*/
-				this.getResponsePostData(this.strApiGateway+ "/getuser/",options,sendData )
+
+				this.getResponsePostData(this.auth.getApiGateWay()+ "/getuser/",options,sendData )
 				.then(data => {
 					console.log(data)
 				})
@@ -134,7 +131,6 @@ export class RestApiComponent implements OnInit {
 	}
 	
 	getResponsePostData(url: string, options: any, sendData : any) {
-		//var data = { "Username" :  sendData};
 		return new Promise(resolve => {
 			this.http.post(url, sendData, options)
 				.map(results => results.json())
