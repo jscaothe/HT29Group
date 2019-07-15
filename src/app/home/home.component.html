@@ -1,0 +1,24 @@
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+
+<div class="container">
+	<div class="row login_box">
+		<div class="col-md-12 col-xs-12" align="center">
+			<div class="line">
+				<h3>{{ getCurrentDate()}}</h3>
+			</div>
+			<div class="outter"><img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="image-circle" />
+			</div>
+			<h1>Hi Guest</h1>
+			<span>INDIAN</span>
+		</div>
+		<div class="col-md-12 col-xs-12 login_control">
+			<div class="control">
+				<div class="label">Email Address</div>
+				<input type="text" class="form-control" [value]="getUser().UserAttribute.Value" />
+			</div>
+			<div align="center">
+				<button class="btn btn-orange">Change</button>
+			</div>
+		</div>
+	</div>
+</div>
