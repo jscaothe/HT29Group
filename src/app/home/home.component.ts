@@ -11,7 +11,7 @@ import { UsersAttributes } from "../shared/UsersAttributes.service";
 })
 export class HomeComponent implements OnInit {
   public now: string = "Demo";
-  public strApiGateway: string = "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
+  //public strApiGateway: string = "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
   dataResponse: any;
   public user = <Users>{};
 
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
           "AccessToken": accessToken
         };
 
-        this.getResponsePostData(this.strApiGateway + "/getcurrentuser/", options, sendData)
+        this.getResponsePostData(this.auth.getApiGateWay() + "/getloginuser/", options, sendData)
           .then(data => {
             this.getCurrentInfor(data["body"].toString());
             //console.log(data["body"].toString())
@@ -72,18 +72,19 @@ export class HomeComponent implements OnInit {
     userAtrr.Name = arrUserAttr[2].Name;
     userAtrr.Value = arrUserAttr[2].Value;
     this.user.UserAttribute = userAtrr;
-    //console.log(this.user);
+    console.log(this.user);
   }
 
   getUser() {
-    //console.log(this.user);
-    
     return this.user;
   }
 
-  getEmail() {
+  getEmail() 
+  {
+    let userAtt = <UsersAttributes>{};
+    userAtt= this.getUser().UserAttribute;
     //console.log(this.getUser().UserAttribute.Value);
-    return this.getUser().UserAttribute.Value;
+    return (userAtt.Value)?"":userAtt.Value;//this.getUser().UserAttribute.Value;
   }
 
   getCurrentDate() {

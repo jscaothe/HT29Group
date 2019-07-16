@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home Page</a></li>
       <li routerLinkActive="active"><a *ngIf="!_auth.isLoggedIn()" routerLink="/register">Register</a></li>
-      <li  routerLinkActive="active"><a *ngIf="!_auth.isLoggedIn()" routerLink="/login">Login by my page</a></li>      
+      <li  routerLinkActive="active"><a *ngIf="!_auth.isLoggedIn()" routerLink="/login">Login</a></li>      
       <li><a *ngIf="_auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a></li>
       <li routerLinkActive="active"><a *ngIf="_auth.isLoggedIn()" routerLink="/restapi">Admin Page</a></li>
     </ul>
