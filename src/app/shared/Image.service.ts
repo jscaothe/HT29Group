@@ -1,35 +1,35 @@
-import { Http, Headers } from "@angular/http";
 import { Injectable } from '@angular/core';
-import {AuthenticationDetails, CognitoUser, CognitoUserPool} from 'amazon-cognito-identity-js';
-import { Observable } from 'rxjs/Observable';
+import { Http } from "@angular/http";
 
+@Injectable()
 export class ImageService {
+  constructor(private http: Http) { }
+  dataResponse: any;
 
-    constructor(private http: Http) { }
-    dataResponse: any;
+  //constructor() { }
 
-    public uploadImage(image: File){
+  public uploadImage(image: File) {
 
 
-        let options = { 
-        };
-        let sendData = {
-            "imageFile" : image
-        };
+    let options = {
 
-        return this.getResponsePostData("",options,sendData );
-    }
+    };
+    let sendData = {
+      "imageFile": image
+    };
 
-    getResponsePostData(url: string, options: any, sendData: any) {
-        return new Promise(resolve => {
-            this.http.post(url, sendData, options)
-                .map(results => results.json())
-                .subscribe(data => {
-                    this.dataResponse = data;
-                    resolve(this.dataResponse);
-                })
-        });
-    }
+    return this.getResponsePostData("", options, sendData);
+  }
 
+  getResponsePostData(url: string, options: any, sendData: any) {
+    return new Promise(resolve => {
+      this.http.post(url, sendData, options)
+        .map(results => results.json())
+        .subscribe(data => {
+          this.dataResponse = data;
+          resolve(this.dataResponse);
+        })
+    });
+  }
 
 }

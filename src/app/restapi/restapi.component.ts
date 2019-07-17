@@ -42,6 +42,7 @@ export class RestApiComponent implements OnInit {
 				const token = session.getIdToken().getJwtToken();
 				let myHeaders = new Headers();
 				myHeaders.append('Authorization', token);
+				//alert(token);
 				let options = { headers: myHeaders };
 				console.log(this.auth.getApiGateWay());
 				this.getResponseGetData(this.auth.getApiGateWay() + "/listusers", options)

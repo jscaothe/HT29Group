@@ -4,7 +4,8 @@ import { AuthorizationService } from "../shared/authorization.service";
 import { Http, Headers } from "@angular/http";
 import { Users } from "../shared/Users.service";
 import { UsersAttributes } from "../shared/UsersAttributes.service";
-import { ImageService }  from "../shared/Image.service"  
+import { ImageService } from '../shared/image.service';
+//import { ImageService } from "../shared/image.service"
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
 }
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   public user = <Users>{};
   selectedFile: ImageSnippet;
 
-  constructor(private http: Http, private auth: AuthorizationService, private imageService: ImageService) {
+  constructor(private http: Http, private auth: AuthorizationService) {
     //setInterval(() => {
     //  this.now = new Date().getHours() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds()
     //}, 1);
@@ -107,7 +108,8 @@ export class HomeComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.imageService.uploadImage(this.selectedFile.file);
+      //ImageService.
+      //this..uploadImage(this.selectedFile.file);
     });
 
     reader.readAsDataURL(file);
