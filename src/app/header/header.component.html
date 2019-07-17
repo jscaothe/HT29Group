@@ -4,9 +4,9 @@
       <a class="navbar-brand" href="#">HT20 Team</a>
     </div>
     <ul class="nav navbar-nav">
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home Page</a></li>
-      <li routerLinkActive="active"><a *ngIf="!_auth.isLoggedIn()" routerLink="/register">Register</a></li>
-      <li  routerLinkActive="active"><a *ngIf="!_auth.isLoggedIn()" routerLink="/login">Login</a></li>      
+      <li routerLinkActive="active" ><a *ngIf="_auth.isLoggedIn()" routerLink="/home">Home Page</a></li>
+      <li  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a *ngIf="!_auth.isLoggedIn()" routerLink="/login">Login</a></li>  
+      <li  routerLinkActive="active"  ><a *ngIf="!_auth.isLoggedIn()" routerLink="/register">Register</a></li>
       <li><a *ngIf="_auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a></li>
       <li routerLinkActive="active"><a *ngIf="_auth.isLoggedIn()" routerLink="/restapi">Admin Page</a></li>
     </ul>

@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from "@angular/forms";
 import { AuthorizationService } from "../shared/authorization.service";
 import { Http, Headers } from "@angular/http";
 import { Users } from "../shared/Users.service";
 import { UsersAttributes } from "../shared/UsersAttributes.service";
+import { ImageService }  from "../shared/Image.service"  
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
-  public now: string = "Demo";
-  //public strApiGateway: string = "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
   dataResponse: any;
   public user = <Users>{};
+  selectedFile: ImageSnippet;
 
-  constructor(private http: Http, private auth: AuthorizationService) {
+  constructor(private http: Http, private auth: AuthorizationService, private imageService: ImageService) {
     //setInterval(() => {
     //  this.now = new Date().getHours() + ':' + new Date().getMinutes().toString() + ':' + new Date().getSeconds()
     //}, 1);
@@ -58,7 +63,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCurrentInfor(jsonString: string) {
-    
+
     //let user = <Users>{};
     let userAtrr = <UsersAttributes>{};
     var usersInfor = [];
@@ -66,7 +71,7 @@ export class HomeComponent implements OnInit {
     usersInfor = JSON.parse(jsonString);
     arrUserAttr = JSON.parse(jsonString).UserAttributes;
 
-    
+
 
     this.user.UserId = usersInfor['Username'];
     userAtrr.Name = arrUserAttr[2].Name;
@@ -77,18 +82,6 @@ export class HomeComponent implements OnInit {
 
   getUser() {
     return this.user;
-  }
-
-  getEmail() 
-  {
-    let userAtt = <UsersAttributes>{};
-    userAtt= this.getUser().UserAttribute;
-    //console.log(this.getUser().UserAttribute.Value);
-    return (userAtt.Value)?"":userAtt.Value;//this.getUser().UserAttribute.Value;
-  }
-
-  getCurrentDate() {
-    return this.now;
   }
 
   getResponsePostData(url: string, options: any, sendData: any) {
@@ -102,5 +95,23 @@ export class HomeComponent implements OnInit {
         })
     });
   }
+
+  onSubmit(form: NgForm) {
+
+  }
+
+
+  profileImageChange(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.imageService.uploadImage(this.selectedFile.file);
+    });
+
+    reader.readAsDataURL(file);
+  }
+
 
 }

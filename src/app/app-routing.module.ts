@@ -7,7 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import { UserInforComponent } from './user-infor/user-infor.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},  
+  {path: 'home', component: HomeComponent},  
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'restapi', component: RestApiComponent },
