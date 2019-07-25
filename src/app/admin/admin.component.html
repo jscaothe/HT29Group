@@ -15,6 +15,7 @@
       <tr>        
         <th>Id</th>
         <th>Status</th>
+        <th>GroupName</th>
         <th>Email</th>
         <th>Add to Admin</th>
       </tr>
@@ -23,8 +24,9 @@
       <tr *ngFor="let user of lstUsers">        
         <td>{{user.UserId}}</td>
         <td>{{user.UserStatus}}</td>
-        <td>{{getEmailFromAttributes(user.UsersAttributes)}}</td>
-        <td><a  href="javascript:void(0)" (click)="getUserById(user.UserId)">Logout</a></td>
+        <td>{{user.GroupName}}</td>
+        <td>{{user.Email}}</td>
+        <td><a  href="javascript:void(0)" (click)="addToAdmin(user.UserId)">Add To Addmin</a></td>
       </tr>
     </tbody>
   </table>

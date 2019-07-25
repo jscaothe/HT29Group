@@ -3,9 +3,6 @@ import {NgForm} from "@angular/forms";
 import {AuthorizationService} from "../shared/authorization.service";
 import { Router } from '@angular/router';
 
-// https://github.com/aws/amazon-cognito-identity-js
-// https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -37,8 +34,8 @@ export class RegisterComponent {
     const code = form.value.code;
     
     this.auth.confirmAuthCode(code).subscribe(
-      (data) => {
-        //this._router.navigateByUrl('/');
+      () => {
+        this._router.navigateByUrl('/login');
         this.codeWasConfirmed = true;
         this.confirmCode = false;
       },
@@ -46,5 +43,6 @@ export class RegisterComponent {
         console.log(err);
         this.error = "Confirm Authorization Error has occurred";
       });
+      //this._router.navigateByUrl('/profile');
   }
 }

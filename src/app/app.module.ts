@@ -5,28 +5,27 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { RestApiComponent } from './restapi/restapi.component';
-import { HomeComponent } from './home/home.component';
-import {AppRoutingModule} from "./app-routing.module";
-import {HttpModule} from "@angular/http";
-import {AuthorizationService} from "./shared/authorization.service";
-import {FormsModule} from "@angular/forms";
-import { UserInforComponent } from './user-infor/user-infor.component';
+import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AppRoutingModule} from "./app-routing.module";
+import { HttpModule} from "@angular/http";
+import { AuthorizationService} from "./shared/authorization.service";
+import { FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
+    ProfileComponent,
     LoginComponent,
     RegisterComponent,    
-    RestApiComponent, UserInforComponent    
+    AdminComponent, 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AuthorizationService],
   bootstrap: [AppComponent]

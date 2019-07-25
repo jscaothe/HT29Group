@@ -1,14 +1,14 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">HT20 Team</a>
+      <a class="navbar-brand">HT20 Team</a>
     </div>
     <ul class="nav navbar-nav">
-      <li routerLinkActive="active" ><a *ngIf="_auth.isLoggedIn()" routerLink="/home">Home Page</a></li>
-      <li  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a *ngIf="!_auth.isLoggedIn()" routerLink="/login">Login</a></li>  
-      <li  routerLinkActive="active"  ><a *ngIf="!_auth.isLoggedIn()" routerLink="/register">Register</a></li>
-      <li><a *ngIf="_auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a></li>
-      <li routerLinkActive="active"><a *ngIf="_auth.isLoggedIn()" routerLink="/restapi">Admin Page</a></li>
+      <li routerLinkActive="active"><a *ngIf="auth.isLoggedIn()" routerLink="/profile">Home Page</a></li>
+      <li routerLinkActive="active"><a *ngIf="!auth.isLoggedIn()" routerLink="/login">Login</a></li>
+      <li routerLinkActive="active"><a *ngIf="!auth.isLoggedIn()" routerLink="/register">Register</a></li>
+      <li><a *ngIf="auth.isLoggedIn()" href="javascript:void(0)" (click)="doLogout()">Logout</a></li>
+      <li routerLinkActive="active"><a *ngIf="this.isAdminGroup" routerLink="/admin">Admin Page</a></li>
     </ul>
   </div>
 </nav>

@@ -1,17 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
-import {RestApiComponent} from "./restapi/restapi.component";
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
-import { UserInforComponent } from './user-infor/user-infor.component';
+import { NgModule} from '@angular/core';
+import { RouterModule, Routes} from "@angular/router";
+import { LoginComponent} from "./login/login.component";
+import { RegisterComponent} from "./register/register.component";
+import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent},  
+  {path: 'profile', component: ProfileComponent},  
   {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'restapi', component: RestApiComponent },
-  {path: 'userinfor', component: UserInforComponent}
+  {path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({

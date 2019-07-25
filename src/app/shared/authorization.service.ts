@@ -14,13 +14,24 @@ const userPool = new CognitoUserPool(poolData);
 export class AuthorizationService {
 
   public apiGateway : string =  "https://5vz9msegch.execute-api.ap-northeast-1.amazonaws.com/dev";
+  public cognitoDomain : string = "https://demologin.auth.ap-northeast-1.amazoncognito.com";
+  public s3Url : string = "http://localhost:4200";
 
   cognitoUser: any;
+  jwtToken : any;
+  accessToken: any;
 
   constructor() { }
 
   getApiGateWay() {
     return this.apiGateway;
+  }
+
+
+  loginLink() {
+    let loginLink : string;
+    loginLink = this.cognitoDomain + "/login?response_type=code&client_id="+ poolData.ClientId +"&redirect_uri=" + this.s3Url;
+    return loginLink;
   }
 
   register(email, password) {
@@ -107,16 +118,52 @@ export class AuthorizationService {
     this.cognitoUser = null;
   }
 
-	/*getResponseGetData(url: string, options: any) {
-		return new Promise(resolve => {
-			this.http.get(url, options)
-				.map(results => results.json())
-				.subscribe(data => {
-					this.dataResponse = data;
-					resolve(this.dataResponse);
-				})
-		});
-	}*/
-	
 
+  getJwtToken() {
+    var authenticatedUser = this.getAuthenticatedUser();
+		if (authenticatedUser == null) {
+			return;
+		}
+		authenticatedUser.getSession((err, session) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+  
+			this.getAuthenticatedUser().getSession((err, session) => {
+				if (err) {
+					console.log(err);
+					return;
+				}
+        this.jwtToken = session.getIdToken().getJwtToken();
+        //alert(this.jwtToken);
+			});
+    });
+    return this.jwtToken;
+  }
+
+  getAccessToken() {
+    var authenticatedUser = this.getAuthenticatedUser();
+		if (authenticatedUser == null) {
+			return;
+		}
+		authenticatedUser.getSession((err, session) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+  
+			this.getAuthenticatedUser().getSession((err, session) => {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				this.accessToken = session.getAccessToken().getJwtToken();
+			});
+    });
+    return this.accessToken;
+  }
+
+
+  
 }
